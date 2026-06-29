@@ -1,4 +1,5 @@
 import ky from "ky";
+import { mapCartsResponse } from "../mappers/cartMapper";
 
 const api = ky.create({ prefix: "https://jsonplaceholder.typicode.com" });
 
@@ -9,5 +10,8 @@ export const postApi = {
 };
 
 export const cartApi = {
-  getAllCart: () => dummmyApi.get("").json(),
+  getAllCart: async () => {
+    const raw = await dummmyApi.get("/").json();
+    return mapCartsResponse(raw);
+  },
 };

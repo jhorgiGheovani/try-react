@@ -1,15 +1,11 @@
 import SharedCard from "../components/shared/SharedCard";
+import CartCard from "../components/shared/CartCard";
 import { useState, useEffect } from "react";
 import { postApi, cartApi } from "../services/api";
 
-const dummyData = [
-  { tittle: "Card Pertama", body: "Ini isi dari card pertama" },
-  { tittle: "Card Kedua", body: "Ini isi dari card kedua" },
-  { tittle: "Card Ketiga", body: "Ini isi dari card ketiga" },
-];
-
 export default function HomePage() {
   const [post, setPost] = useState([]);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     postApi
@@ -18,21 +14,31 @@ export default function HomePage() {
         setPost(p);
       })
       .catch(console.error);
-  });
-
-  // console.log("POST => ", post);
+  }, []);
 
   useEffect(() => {
-    cartApi.getAllCart().then((result) => {
-      console.log("PRINT CART:", result);
-    });
+    cartApi
+      .getAllCart()
+      .then((result) => {
+        setCart(result.carts);
+      })
+      .catch(console.error);
   }, []);
+
+  // console.log("POST => ", post);
+  // console.log("CART => ", cart);
+
+  // useEffect(() => {
+  //   cartApi.getAllCart().then((result) => {
+  //     console.log("PRINT CART:", result);
+  //   });
+  // }, []);
 
   return (
     <div className="flex justify-center">
       <div className="flex flex-col gap-3">
-        {post.map((item) => (
-          <SharedCard key={item.id} data={item} />
+        {cart.map((item) => (
+          <CartCard key={item.id} data={item} />
         ))}
       </div>
     </div>
