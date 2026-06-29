@@ -1,8 +1,11 @@
+import { useTheme } from "../../context/ThemeContext";
+
 export default function CartCard({ data }) {
   const { products, total, discountedTotal } = data;
+  const { isDark } = useTheme();
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-4 mb-4 border border-gray-200">
+    <div className={`rounded-xl shadow-md p-4 mb-4 border w-96 ${isDark ? "bg-gray-800 border-gray-700 text-white" : "bg-white border-gray-200 text-black"}`}>
       <div className="flex flex-col gap-3">
         {products.map((product) => (
           <div key={product.id} className="flex items-center gap-3">
