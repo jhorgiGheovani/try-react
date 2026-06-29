@@ -9,5 +9,5 @@ export const postApi = {
 };
 
 export const cartApi = {
-  getAllCart: () => dummmyApi.get().json(),
+  getAllCart: () => dummmyApi.get("").json(),
 };
