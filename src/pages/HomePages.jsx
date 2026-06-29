@@ -1,6 +1,6 @@
 import SharedCard from "../components/shared/SharedCard";
 import { useState, useEffect } from "react";
-import { postApi } from "../services/api";
+import { postApi, cartApi } from "../services/api";
 
 const dummyData = [
   { tittle: "Card Pertama", body: "Ini isi dari card pertama" },
@@ -20,7 +20,14 @@ export default function HomePage() {
       .catch(console.error);
   });
 
-  console.log("POST => ", post);
+  // console.log("POST => ", post);
+
+  useEffect(() => {
+    cartApi.getAllCart().then((result) => {
+      console.log("PRINT CART:", result);
+    });
+  }, []);
+
   return (
     <div className="flex justify-center">
       <div className="flex flex-col gap-3">
