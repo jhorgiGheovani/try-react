@@ -2,12 +2,12 @@ import SharedCard from "../components/shared/SharedCard";
 import CartCard from "../components/shared/CartCard";
 import { useState, useEffect } from "react";
 import { postApi, cartApi } from "../services/api";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme, useThemeJotai } from "../context/ThemeContext";
 
 export default function HomePage() {
   const [post, setPost] = useState([]);
   const [cart, setCart] = useState([]);
-  const { isDark, toggleTheme } = useTheme();
+  const { isDark, toggleTheme } = useThemeJotai();
 
   useEffect(() => {
     postApi
@@ -37,7 +37,9 @@ export default function HomePage() {
   // }, []);
 
   return (
-    <div className={`min-h-screen p-6 ${isDark ? "bg-gray-900" : "bg-gray-100"}`}>
+    <div
+      className={`min-h-screen p-6 ${isDark ? "bg-gray-900" : "bg-gray-100"}`}
+    >
       <div className="flex justify-center mb-4">
         <button
           onClick={toggleTheme}
